@@ -22,10 +22,10 @@ def turnLeft(d):
 
     return d
 
-count = 0
+houseCount = 0
 turn = 0
 visitMap[x][y] = 1
-count += 1
+houseCount += 1
 while True:
     direction = turnLeft(direction)
     nx = x + dx[direction]
@@ -33,7 +33,7 @@ while True:
     if gameMap[nx][ny] == 0 and visitMap[nx][ny] == 0:
         visitMap[nx][ny] = 1
         x, y = nx, ny
-        count += 1
+        houseCount += 1
         turn = 0
         continue
 
@@ -50,5 +50,5 @@ while True:
                 continue
 
 # print(visitMap)
-print(count)
+print(houseCount)
 
