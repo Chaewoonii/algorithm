@@ -18,6 +18,7 @@ def dfs(x, y, graph):
         dfs(x, y + 1, graph)
 
         return True
+
     return False
 
 totalCount = 0
