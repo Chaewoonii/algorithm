@@ -1,4 +1,4 @@
-# 201p, 떡볶이 떡 만들기
+# 201p, 떡볶이 떡 만들기 / 백준 나무 자르기, 2805
 
 n, m = map(int, input().split())
 riceCakes = list(map(int, input().split()))
@@ -8,7 +8,7 @@ start = 0
 end = max(riceCakes)
 
 result = 0
-while (start <= end):
+while start <= end:
     mid = (start + end) // 2
     pieces = 0
 
