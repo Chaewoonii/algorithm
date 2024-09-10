@@ -1,15 +1,15 @@
 # 220p, 개미전사
 
 n = int(input())
-foods = list(map(int, input().split()))
+arr = list(map(int, input().split()))
 
-dp = [0] * 100
+dpTable = [0] * 100
 
-dp[0] = foods[0]
-dp[1] = max(foods[0], foods[1])
+dpTable[0] = arr[0]
+dpTable[1] = max(arr[0], arr[1])
 
 for i in range(2, n):
-    dp[i] = max(dp[i-1], dp[i-2] + foods[i])
+    dpTable[i] = max(dpTable[i-1], dpTable[i] + dpTable[i-2])
 
-# print(dp)
-print(dp[n-1])
+# print(dpTable)
+print(dpTable[n-1])
