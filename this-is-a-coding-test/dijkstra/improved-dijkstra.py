@@ -1,4 +1,4 @@
-# 개선된 다익스트라
+# 개선된 다익스트라: 힙큐
 
 import heapq
 import sys
