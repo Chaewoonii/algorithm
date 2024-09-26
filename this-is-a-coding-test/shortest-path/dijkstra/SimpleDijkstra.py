@@ -23,18 +23,17 @@ distance = [INF] * (n + 1)
 for _ in range(m):
     a, b, c = map(int, input().split())
     # a번 노드에서 b번 노드로 가는 비용은 c
-
     graph[a].append((b, c))
 
 # 방문하지 않은 노드 중, 가장 최단거리가 짧은 노드의 번호를 반환
 def getSmallestNode():
     minValue = INF
-    idx = 0
+    index = 0
     for i in range(1, n + 1):
         if distance[i] < minValue and not visited[i]:
             minValue = distance[i]
-            idx = i
-    return idx
+            index = i
+    return index
 
 def dijkstra(start):
     # 시작 노드 초기화
