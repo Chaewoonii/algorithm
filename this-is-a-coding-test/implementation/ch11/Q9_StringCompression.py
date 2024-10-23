@@ -1,4 +1,6 @@
 # 323p, 문자열 압축
+# 2020 카카오 신입 공채
+# programmers.co.kr/learn/courses/30/lessons/60057
 
 def solution(string):
     answer = len(string)
