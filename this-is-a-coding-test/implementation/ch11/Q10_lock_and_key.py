@@ -26,6 +26,12 @@
 
 import copy
 
+def print_matrix(matrix):
+    print('**')
+    for m in matrix:
+        print(m)
+    print('**')
+
 def turn90(key):
     result = [[] for _ in range(len(key))]
 
@@ -62,6 +68,7 @@ def solution(key, lock):
                     for kj in range(m):
                         expended_lock[i + ki][j + kj] += key[ki][kj]
 
+                # print_matrix(expended_lock)
                 if check_lock(expended_lock, n):
                     return True
 
