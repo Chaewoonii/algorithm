@@ -1,3 +1,4 @@
+# hackers rank week1, Time Conversion
 # 12시간 am, pm 포맷을 24시간 포맷으로 바꾸기
 
 def timeConversion(s):

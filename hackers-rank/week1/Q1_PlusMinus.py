@@ -1,5 +1,4 @@
-# hackers rank
-# 플러스 마이너스
+# hackers rank week1, Plus Minus
 
 def plusMinus(arr):
     result = [0, 0, 0]
