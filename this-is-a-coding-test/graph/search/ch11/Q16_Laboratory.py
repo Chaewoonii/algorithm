@@ -7,8 +7,8 @@ import copy
 
 n, m = map(int, input().split())
 laboratory = [list(map(int, input().split())) for _ in range(n)]
-dRow = [0, 1, 0, -1]
-dCol = [1, 0, -1, 0]
+dRow = [0, 1, 0, -1] # 하 상
+dCol = [1, 0, -1, 0] # 우 좌
 
 # 바이러스 좌표 저장
 def findVirusAndEmptySpace(laboratory):
