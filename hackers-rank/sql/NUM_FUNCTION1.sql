@@ -19,3 +19,10 @@ SELECT ceil(
        avg(salary) - avg(replace(salary, '0', ''))
        )
 FROM employees;
+
+-- Weather Observation Station 2
+SELECT round(sum(lat_n), 2), round(sum(long_w), 2) FROM station;
+
+-- Weather Observation Station 12
+-- truncate: 버림 함수
+SELECT truncate(sum(lat_n), 4) FROM station WHERE lat_n > 38.7880 and lat_n < 137.2345;
