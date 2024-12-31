@@ -26,3 +26,16 @@ SELECT round(sum(lat_n), 2), round(sum(long_w), 2) FROM station;
 -- Weather Observation Station 12
 -- truncate: 버림 함수
 SELECT truncate(sum(lat_n), 4) FROM station WHERE lat_n > 38.7880 and lat_n < 137.2345;
+
+-- Weather Observation Station 14
+SELECT truncate(max(lat_n), 4) FROM station WHERE lat_n < 137.2345;
+
+-- Weather Observation station 15
+SELECT round(long_w, 4) FROM station WHERE lat_n < 137.2345 ORDER BY lat_n DESC LIMIT 1;
+
+-- Weather Observation station 16
+SELECT round(min(lat_n), 4) FROM station WHERE lat_n > 38.7880;
+
+-- Weather Observation station 17
+SELECT round(long_w, 4) FROM station WHERE lat_n > 38.7880 ORDER BY lat_n LIMIT 1;
+
