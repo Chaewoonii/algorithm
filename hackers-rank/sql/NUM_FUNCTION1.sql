@@ -39,3 +39,35 @@ SELECT round(min(lat_n), 4) FROM station WHERE lat_n > 38.7880;
 -- Weather Observation station 17
 SELECT round(long_w, 4) FROM station WHERE lat_n > 38.7880 ORDER BY lat_n LIMIT 1;
 
+-- Weather Observation station 18
+SELECT round(((max(long_w) - min(long_w)) + (max(lat_n) - min(lat_n))), 4) FROM station;
+
+-- Weather Observation station 19
+-- sqrt(): 제곱근 함수
+-- power(n, m): n의 m제곱 / oracle: power, mysql: pow
+SELECT round(
+            sqrt(
+                power((max(long_w) - min(long_w)), 2)
+                + power((max(lat_n) - min(lat_n)), 2)
+            )
+        , 4)
+FROM station;
+
+-- Weather Observation Station 20
+-- oracle: median 함수
+SELECT round(median(lat_n), 4) FROM station;
+
+-- mysql: percent rank 함수 이용
+-- percent_rank(): 인수로 지정한 값의 그룹 내 상대적 위치를 나타내는 백분위 순위를 반환
+SELECT round(lat_n, 4) FROM station
+WHERE lat_n in (
+    SELECT lat_n FROM (
+        SELECT lat_n,
+               percent_rank() over(order by lat_n) as p_rank
+        FROM station
+                      ) p_station
+    WHERE p_rank = 0.5
+);
+
+
+
