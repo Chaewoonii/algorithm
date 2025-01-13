@@ -30,3 +30,12 @@ name / String
 months / Int
 salary / Int */
 SELECT name FROM employee WHERE salary > 2000 AND months < 10 ORDER BY employee_id;
+
+-- Top Earners
+/*
+earnings 에 따라 그룹화 및 정렬한 후, 첫 번째 행만 조회
+*/
+SELECT salary * months as earnings, count(*)
+FROM employee
+GROUP BY earnings
+ORDER BY earnings DESC LIMIT 1;
