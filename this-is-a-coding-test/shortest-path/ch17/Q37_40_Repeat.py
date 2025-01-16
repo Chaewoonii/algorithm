@@ -42,8 +42,8 @@ def floyd():
         print()
 
 
-# 40번, 정확한 순위
-def exackRanking():
+# 38번, 정확한 순위
+def exactRanking():
     n, m = map(int, input().split())
     graph = [[INF] * (n + 1) for _ in range(n + 1)]
 
@@ -71,6 +71,8 @@ def exackRanking():
 
     print(result)
 
+
+# 39, 화성탐사
 def marsExploration():
     for test in range(int(input())):
         n = int(input())
@@ -103,6 +105,37 @@ def marsExploration():
 
         print(distance[n-1][n-1])
 
+# 40, 숨바꼭질
+def hideAndSeek():
+    n, m = map(int, input().split())
+    graph = [[] * (n + 1) for _ in range(n + 1)]
+    for _ in range(m):
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
+
+    distance = [INF] * (n + 1)
+    distance[1] = 0
+    q = [(0, 1)] # 거리, 시작노드: 1번 노드에서 1번 노드로 가는 거리는 0
+
+    while q:
+        dist, now = heapq.heappop(q)
+
+        if distance[now] < dist: continue
+
+        for i in graph[now]:
+            cost = dist + 1
+
+            if cost < distance[i]:
+                distance[i] = cost
+                heapq.heappush(q, (cost, i))
+
+    for i in range(n + 1):
+        if distance[i] == INF: distance[i] = 0
+
+    print(distance.index(max(distance)), end=' ')
+    print(max(distance), end=' ')
+    print(distance.count(max(distance)), end=' ')
 
 if __name__ == "__main__":
-    marsExploration()
+    hideAndSeek()
