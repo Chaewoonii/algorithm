@@ -24,7 +24,7 @@ for test in range(int(input())):
         dist, x, y = heapq.heappop(q)
 
         # 방문 노드 무시
-        if dist < distance[x][y]: continue
+        if dist > distance[x][y]: continue
 
         # 상하좌우 탐색
         for i in range(4):
