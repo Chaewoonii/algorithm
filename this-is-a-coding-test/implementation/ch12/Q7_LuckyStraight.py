@@ -1,4 +1,5 @@
 # 321p, 럭키 스트레이트
+# https://www.acmicpc.net/problem/18406
 
 n = list(map(int, input()))
 half = int(len(n) / 2)
