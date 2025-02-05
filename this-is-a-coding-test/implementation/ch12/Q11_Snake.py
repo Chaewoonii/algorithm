@@ -65,3 +65,5 @@ def solution():
             info_idx += 1
 
     return time
+
+print(solution())

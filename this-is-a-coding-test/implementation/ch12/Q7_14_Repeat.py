@@ -104,7 +104,65 @@ def lockAndKey(lock, key):
                         expended_lock[i + ki][j + kj] -= key[ki][kj]
     return False
 
+# 뱀: 몸은 1, 사과는 2
+def changeDirection(direction, c):
+    if c == 'L':
+        return (direction - 1) % 4
+    else:
+        return (direction + 1) % 4
+
+def snake():
+    n = int(input())
+    dummy = [[0] * (n + 1) for _ in range(n + 1)]
+    for _ in range(int(input())):
+        i, j = map(int, input().split())
+        dummy[i][j] = 2 # 사과는 2
+
+    move = []
+    l = int(input())
+    for _ in range(l):
+        t, c = input().split()
+        move.append((int(t), c))
+
+    #    우0 하1 좌2 상3
+    dx = [0, 1, 0, -1]
+    dy = [1, 0, -1, 0]
+
+    time = 0
+    x, y = 1, 1 # 뱀의 위치
+    direction = 0 # 오른쪽부터 시작
+    dummy[x][y] = 1
+    snake_body = [(x, y)]
+    m_idx = 0
+    while True:
+        nx = x + dx[direction]
+        ny = y + dy[direction]
+        if 1 <= nx <= n and 1 <= ny <= n and dummy[nx][ny] != 1:
+            if dummy[nx][ny] == 2: # 사과가 있을 경우, 뱀의 몸 길이 늘어남
+                dummy[nx][ny] = 1
+
+            elif dummy[nx][ny] == 0: # 사과가 없을 경우, 뱀의 몸 길이 줄어듦
+                dummy[nx][ny] = 1
+                tail_x, tail_y = snake_body.pop(0)
+                dummy[tail_x][tail_y] = 0
+
+            snake_body.append((nx, ny))
+            x, y = nx, ny
+
+        else:
+            time += 1
+            break
+
+        time += 1
+        if m_idx < l and time == move[m_idx][0]:
+            direction = changeDirection(direction, move[m_idx][1])
+            m_idx += 1
+
+    return time
+
+# 기둥과 보 설치
+
+
+
 if __name__ == "__main__":
-    key = [[0, 0, 0], [1, 0, 0], [0, 1, 1]]
-    lock = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
-    print(lockAndKey(lock=lock, key=key))
+    print(snake())
