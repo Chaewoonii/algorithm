@@ -1,6 +1,6 @@
 # 329p, 기둥과 보 설치
 # 2020 카카오 신입 공채
-# programmers.co.kr/learn/courses/30/lessons/60061
+# https://www.programmers.co.kr/learn/courses/30/lessons/60061
 
 # 0 기둥, 1 보 // 표시: 기둥 2, 보 1
 # 0 삭제, 1 설치
@@ -41,13 +41,12 @@ def possible_to_order(structures):
                     ([x + 1, y, 1]in structures and [x - 1, y, 1] in structures)):
                 continue
             else: return False
-
     return True
 
 
-
-n = 5
-build_frame1 = [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
-build_frame2 = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
-print(build(n, build_frame1))
-print(build(n, build_frame2))
+if __name__ == "__main__":
+    n = 5
+    build_frame1 = [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
+    build_frame2 = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
+    print(build(n, build_frame1))
+    print(build(n, build_frame2))
