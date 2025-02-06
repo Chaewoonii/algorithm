@@ -161,8 +161,45 @@ def snake():
     return time
 
 # 기둥과 보 설치
+def pillarAndBeams(n, build_frame):
+    structure = []
+    for order in build_frame:
+        x, y, stuff, operation = order
+        if operation == 1:
+            structure.append([x, y, stuff])
+            if not possible(structure):
+                structure.remove([x, y, stuff])
+        else:
+            if [x, y, stuff] in structure:
+                structure.remove([x, y, stuff])
+                if not possible(structure):
+                    structure.append([x, y, stuff])
+    return sorted(structure)
 
+# 가능한지 검증
+def possible(structure):
+    for x, y, stuff in structure:
+        # 기둥인 경우: 바닥 위, 보의 한쪽 끝 부분 위, 다른 기둥 위
+        if stuff == 0:
+            if (y == 0 or
+                    [x, y, 1] in structure or
+                    [x - 1, y, 1] in structure or
+                    [x, y - 1, 0 ] in structure):
+                continue
+            else:
+                return False
+
+        # 보인 경우: 한쪽 끝이 기둥 위, 양쪽 끝이 다른 보와 동시에 연결
+        else:
+            if ([x, y - 1, 0] in structure or
+                    [x + 1, y - 1, 0] in structure or
+                    ([x - 1, y, 1] in structure and [x + 1, y, 1] in structure)):
+                continue
+            else:
+                return False
+    return True
 
 
 if __name__ == "__main__":
-    print(snake())
+    print(pillarAndBeams(5, [[1, 0, 0, 1], [1, 1, 1, 1], [2, 1, 0, 1], [2, 2, 1, 1], [5, 0, 0, 1], [5, 1, 0, 1], [4, 2, 1, 1], [3, 2, 1, 1]]))
+    print(pillarAndBeams(5, [[0, 0, 0, 1], [2, 0, 0, 1], [4, 0, 0, 1], [0, 1, 1, 1], [1, 1, 1, 1], [2, 1, 1, 1], [3, 1, 1, 1], [2, 0, 0, 0], [1, 1, 1, 0], [2, 2, 0, 1]]))
