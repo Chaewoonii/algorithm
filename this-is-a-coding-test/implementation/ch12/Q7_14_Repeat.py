@@ -200,6 +200,39 @@ def possible(structure):
     return True
 
 
+# 치킨 배달
+# 치킨 집: 치킨 집을 m개 뽑는 모든 경우의 수 중 치킨거리가 가장 짧은 것 구하기.
+# 집마다 치킨거리 최솟값 구하기 <- 모든 치킨집 중 가장 작은 것 선택
+from itertools import combinations
+def chickenDelivery():
+    n, m = map(int, input().split())
+    city = [list(map(int, input().split())) for _ in range(n)] # 1은 집, 2는 치킨집
+    chicken_houses = []
+    houses = []
+    for i in range(n):
+        for j in range(n):
+            if city[i][j] == 2:
+                chicken_houses.append((i, j))
+            elif city[i][j] == 1:
+                houses.append((i, j))
+
+
+    chicken_distance = 1e9
+    chicken_combi = combinations(chicken_houses, m)
+    for combi in chicken_combi:
+        c_dist = 0
+        for house in houses:
+            c_dist += getDistance(house, combi)
+
+        chicken_distance = min(chicken_distance, c_dist)
+
+    return chicken_distance
+
+def getDistance(location, loc_list):
+    distance = 1e9
+    for loc in loc_list:
+        distance = min(distance, abs(loc[0] - location[0]) + abs(loc[1] - location[1]))
+    return distance
+
 if __name__ == "__main__":
-    print(pillarAndBeams(5, [[1, 0, 0, 1], [1, 1, 1, 1], [2, 1, 0, 1], [2, 2, 1, 1], [5, 0, 0, 1], [5, 1, 0, 1], [4, 2, 1, 1], [3, 2, 1, 1]]))
-    print(pillarAndBeams(5, [[0, 0, 0, 1], [2, 0, 0, 1], [4, 0, 0, 1], [0, 1, 1, 1], [1, 1, 1, 1], [2, 1, 1, 1], [3, 1, 1, 1], [2, 0, 0, 0], [1, 1, 1, 0], [2, 2, 0, 1]]))
+    print(chickenDelivery())
