@@ -1,38 +1,38 @@
 n = int(input())
-data = list(map(int, input().split()))
-add, sub, mul, div = map(int, input().split())
+nums = list(map(int, input().split()))
+ops = list(map(int, input().split()))
 
-min_value = 1e9
-max_value = -1e9
+mx = -1e9
+mn = 1e9
 
 def dfs(i, now):
-    global add, sub, mul, div, min_value, max_value
+    global mx, mn
 
-    if i == n:
-        min_value = min(min_value, now)
-        max_value = max(max_value, now)
-    else:
-        if add > 0:
-            add -= 1
-            dfs(i + 1, now + data[i])
-            add += 1
+    if i == n - 1:
+        mx = max(now, mx)
+        mn = min(now, mn)
+        return
 
-        if sub > 0:
-            sub -= 1
-            dfs(i + 1, now - data[i])
-            sub += 1
+    if ops[0] != 0:  # 덧셈
+        ops[0] -= 1
+        dfs(i + 1, now + nums[i + 1])
+        ops[0] += 1
 
-        if mul > 0:
-            mul -= 1
-            dfs(i + 1, now * data[i])
-            mul += 1
+    if ops[1] != 0:  # 뺄셈
+        ops[1] -= 1
+        dfs(i + 1, now - nums[i + 1])
+        ops[1] += 1
 
-        if div > 0:
-            div -= 1
-            dfs(i + 1, int(now / data[i]))
-            div += 1
+    if ops[2] != 0:  # 곱셈
+        ops[2] -= 1
+        dfs(i + 1, now * nums[i + 1])
+        ops[2] += 1
 
-dfs(1, data[0])
+    if ops[3] != 0:
+        ops[3] -= 1
+        dfs(i + 1, int(now / nums[i + 1]))
+        ops[3] += 1
 
-print(max_value)
-print(min_value)
+dfs(0, nums[0])
+print(mx)
+print(mn)

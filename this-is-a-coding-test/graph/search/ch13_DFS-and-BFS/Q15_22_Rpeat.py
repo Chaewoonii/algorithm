@@ -127,5 +127,58 @@ def virusBFS(test_tube, virus_location):
 
     return new_location
 
+# 괄호 변환
+def get_balanced_index(w):
+    cnt = 0
+    for i in range(len(w)):
+        if w[i] == '(':
+            cnt += 1
+        else:
+            cnt -= 1
+
+        if cnt == 0:
+            return i
+
+def check_right_parentheses(u):
+    cnt = 0
+    for p in u:
+        if p == "(":
+            cnt += 1
+        else:
+            if cnt == 0:
+                return False
+            cnt -= 1
+
+    return True
+
+def parentheses_conversion(w):
+    answer = ""
+    if w == "": return answer
+
+    idx = get_balanced_index(w)
+    u = w[:idx + 1]
+    v = w[idx + 1:]
+    if check_right_parentheses(u):
+        answer = u + parentheses_conversion(v)
+    else:
+        answer = "("
+        answer += parentheses_conversion(v)
+        answer += ")"
+
+        u = list(u[1 : -1])
+        for i in range(len(u)):
+            if u[i] == "(":
+                u[i] = ")"
+            else:
+                u[i] = "("
+
+        answer += "".join(u)
+
+    return answer
+
+# 연산자 끼워넣기
+# Q19_InsertOperator_Dfs 에 다시 풂.
+
+
 if __name__ == "__main__":
-    print(competitive_contagion())
+    pass

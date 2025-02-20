@@ -12,19 +12,6 @@ def getBalancedIdx(string):
         if cnt == 0:
             return i
 
-'''
-def checkUprightParentheses(string):
-    while len(string) >= 0:
-        if '()' in string:
-            string = string.replace('()', '')
-        else:
-            break
-
-    if len(string) == 0: return True
-    else: return False
-
-'''
-
 def checkUprightParentheses(string):
     cnt = 0
     for i in string:
