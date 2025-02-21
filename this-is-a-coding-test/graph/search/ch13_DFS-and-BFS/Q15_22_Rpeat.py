@@ -2,7 +2,6 @@ import sys
 from collections import deque
 from copy import deepcopy
 from itertools import combinations
-from utils.myutil import print_matrix
 
 input = sys.stdin.readline
 
@@ -178,6 +177,61 @@ def parentheses_conversion(w):
 
 # 연산자 끼워넣기
 # Q19_InsertOperator_Dfs 에 다시 풂.
+
+# 감시 피하기
+def avoid_monitoring():
+    n = int(input())
+    data = [list(input().split()) for _ in range(n)]
+    empty_space = []
+    teachers = []
+    for i in range(n):
+        for j in range(n):
+            if data[i][j] == "X": empty_space.append((i, j))
+            elif data[i][j] == "T": teachers.append((i, j))
+
+    walls = combinations(empty_space, 3)
+    result = "NO"
+    for wall in walls:
+        temp = deepcopy(data)
+        for wx, wy in wall:
+            temp[wx][wy] = "O"
+
+        flag = len(teachers)
+        for t in teachers:
+            if can_avoid(temp, t): flag -= 1
+
+        if flag == 0:
+            result = "YES"
+            break
+
+    print(result)
+
+ # 지도와 선생님의 위치, 학생을 발견하면 False
+def can_avoid(matrix, loc):
+    x, y = loc
+    n = len(matrix)
+    # 상: 0~x, y는 고정
+    for i in range(x, -1, -1):
+        if matrix[i][y] == "S": return False
+        elif matrix[i][y] == "O": break
+
+    # 하: x~n, y는 고정
+    for i in range(x, n):
+        if matrix[i][y] == "S": return False
+        elif matrix[i][y] == "O": break
+
+    # 좌: 0~y, x는 고정
+    for i in range(y, -1, -1):
+        if matrix[x][i] == "S": return False
+        elif matrix[x][i] == "O": break
+
+    # 우: y~n, x는 고정
+    for i in range(y, n):
+        if matrix[x][i] == "S": return False
+        elif matrix[x][i] == "O": break
+    return True
+
+
 
 
 if __name__ == "__main__":
