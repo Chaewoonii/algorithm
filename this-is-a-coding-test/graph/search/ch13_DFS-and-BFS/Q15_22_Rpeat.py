@@ -2,7 +2,6 @@ import sys
 from collections import deque
 from copy import deepcopy
 from itertools import combinations
-from utils.myutil import print_matrix
 
 input = sys.stdin.readline
 
@@ -127,5 +126,113 @@ def virusBFS(test_tube, virus_location):
 
     return new_location
 
+# 괄호 변환
+def get_balanced_index(w):
+    cnt = 0
+    for i in range(len(w)):
+        if w[i] == '(':
+            cnt += 1
+        else:
+            cnt -= 1
+
+        if cnt == 0:
+            return i
+
+def check_right_parentheses(u):
+    cnt = 0
+    for p in u:
+        if p == "(":
+            cnt += 1
+        else:
+            if cnt == 0:
+                return False
+            cnt -= 1
+
+    return True
+
+def parentheses_conversion(w):
+    answer = ""
+    if w == "": return answer
+
+    idx = get_balanced_index(w)
+    u = w[:idx + 1]
+    v = w[idx + 1:]
+    if check_right_parentheses(u):
+        answer = u + parentheses_conversion(v)
+    else:
+        answer = "("
+        answer += parentheses_conversion(v)
+        answer += ")"
+
+        u = list(u[1 : -1])
+        for i in range(len(u)):
+            if u[i] == "(":
+                u[i] = ")"
+            else:
+                u[i] = "("
+
+        answer += "".join(u)
+
+    return answer
+
+# 연산자 끼워넣기
+# Q19_InsertOperator_Dfs 에 다시 풂.
+
+# 감시 피하기
+def avoid_monitoring():
+    n = int(input())
+    data = [list(input().split()) for _ in range(n)]
+    empty_space = []
+    teachers = []
+    for i in range(n):
+        for j in range(n):
+            if data[i][j] == "X": empty_space.append((i, j))
+            elif data[i][j] == "T": teachers.append((i, j))
+
+    walls = combinations(empty_space, 3)
+    result = "NO"
+    for wall in walls:
+        temp = deepcopy(data)
+        for wx, wy in wall:
+            temp[wx][wy] = "O"
+
+        flag = len(teachers)
+        for t in teachers:
+            if can_avoid(temp, t): flag -= 1
+
+        if flag == 0:
+            result = "YES"
+            break
+
+    print(result)
+
+ # 지도와 선생님의 위치, 학생을 발견하면 False
+def can_avoid(matrix, loc):
+    x, y = loc
+    n = len(matrix)
+    # 상: 0~x, y는 고정
+    for i in range(x, -1, -1):
+        if matrix[i][y] == "S": return False
+        elif matrix[i][y] == "O": break
+
+    # 하: x~n, y는 고정
+    for i in range(x, n):
+        if matrix[i][y] == "S": return False
+        elif matrix[i][y] == "O": break
+
+    # 좌: 0~y, x는 고정
+    for i in range(y, -1, -1):
+        if matrix[x][i] == "S": return False
+        elif matrix[x][i] == "O": break
+
+    # 우: y~n, x는 고정
+    for i in range(y, n):
+        if matrix[x][i] == "S": return False
+        elif matrix[x][i] == "O": break
+    return True
+
+
+
+
 if __name__ == "__main__":
-    print(competitive_contagion())
+    pass
