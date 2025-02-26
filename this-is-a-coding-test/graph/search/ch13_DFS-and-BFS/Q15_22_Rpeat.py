@@ -231,6 +231,9 @@ def can_avoid(matrix, loc):
         elif matrix[x][i] == "O": break
     return True
 
+# 인구 이동
+
+
 
 
 
