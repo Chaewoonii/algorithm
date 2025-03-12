@@ -16,7 +16,7 @@ distance = [INF] * (n + 1) # 최단거리 테이블
 # 간선 정보 입력 받기
 for _ in range(m):
     a, b, c = map(int, input().split())
-    graph[a].append(b, c) # a 노드에서 b 노드로 가는 비용은 c
+    graph[a].append((b, c)) # a 노드에서 b 노드로 가는 비용은 c
 
 # 우선순위 큐를 이용한 다익스트라 알고리즘
 def dijkstra(start):
