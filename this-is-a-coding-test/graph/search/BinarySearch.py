@@ -25,12 +25,12 @@ def binarySearch2(arr, target, start, end):
 
         if arr[mid] == target: return mid
         elif arr[mid] > target: end = mid - 1
-        elif arr[mid] < target: start + mid + 1
+        elif arr[mid] < target: start = mid + 1
 
 n, target = map(int, input().split())
 array = list(map(int, input().split()))
 
-result = binarySearch1(array, target, 0, n - 1)
+result = binarySearch2(array, target, 0, n - 1)
 if result == None: print("원소가 존재하지 않습니다")
 else:
     print(result + 1)

@@ -1,3 +1,4 @@
+# 소마 2차 1번문제와 비슷
 def solution(name):
     A = ord('A')
     Z = ord('Z')
