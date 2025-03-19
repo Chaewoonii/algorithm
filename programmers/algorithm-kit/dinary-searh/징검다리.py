@@ -31,6 +31,3 @@ def deleteRocks(rocks, dist):
         else:
             prev = rocks[i]  # dist보다 크면(거리가 충분하면) 바위 유지, prev 갱신
     return deleted
-
-x = 2
-y = 4
