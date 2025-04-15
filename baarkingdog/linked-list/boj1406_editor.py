@@ -1,57 +1,49 @@
 import sys
-
-
+input = sys.stdin.readline
 class Node:
-    def __init__(self, char=None):
-        self.char = char
+    def __init__(self, data):
+        self.data = data
         self.prev = None
         self.next = None
 
 
-input = sys.stdin.readline
-
-# 더미 노드 생성
-head = Node()
-tail = Node()
+head = Node(None)
+tail = Node(None)
 head.next = tail
 tail.prev = head
 
-# 초기 문자열 입력
-cursor = tail  # 커서는 항상 현재 위치 '앞에' 삽입되도록 tail에 위치
-for char in input().rstrip():
-    new_node = Node(char)
-    new_node.prev = cursor.prev
-    new_node.next = cursor
-    cursor.prev.next = new_node
-    cursor.prev = new_node
+cursor = tail  # 커서는 마지막에 위치
+for data in input().rstrip():
+    node = Node(data)
+    node.prev = cursor.prev  # 커서 앞에 삽입
+    node.next = cursor
+    cursor.prev.next = node
+    cursor.prev = node
 
-# 명령 처리
 for _ in range(int(input())):
-    command = input().split()
+    op = input().split()
+    if op[0] == "L" and cursor.prev != head:
+        cursor = cursor.prev
 
-    if command[0] == 'L':
-        if cursor.prev != head:
-            cursor = cursor.prev
-    elif command[0] == 'D':
-        if cursor != tail:
-            cursor = cursor.next
-    elif command[0] == 'B':
-        if cursor.prev != head:
-            to_remove = cursor.prev
-            to_remove.prev.next = cursor
-            cursor.prev = to_remove.prev
-    elif command[0] == 'P':
-        new_node = Node(command[1])
-        new_node.prev = cursor.prev
-        new_node.next = cursor
-        cursor.prev.next = new_node
-        cursor.prev = new_node
+    elif op[0] == "D" and cursor.next != tail:
+        cursor = cursor.next
 
-# 결과 출력
+    elif op[0] == "B" and cursor.prev != head:
+        to_delete = cursor.prev
+        to_delete.prev.next = cursor
+        cursor.prev = to_delete.prev
+
+    elif op[0] == "P":
+        add = Node(op[1])
+        add.prev = cursor.prev
+        add.next = cursor
+        cursor.prev.next = add
+        cursor.prev = add
+
 result = []
 node = head.next
 while node != tail:
-    result.append(node.char)
+    result.append(node.data)
     node = node.next
 
-print(''.join(result))
+print("".join(result))
