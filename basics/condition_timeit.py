@@ -9,4 +9,3 @@ print(timeit("s='1'; s in ['(',')','[',']']"))
 print(timeit("s=']'; s == '(' or s == ')' or s == '[' or s == ']'"))
 print(timeit("s=']'; s in '()[]'"))
 print(timeit("s=']'; s in ['(',')','[',']']"))
-
