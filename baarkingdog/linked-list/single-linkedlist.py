@@ -27,7 +27,7 @@ class SinglyLinkedList:
     def traverse(self):
         node = self.head.next
         while node:
-            print(node.data, end = " ")
+            print(node.string, end =" ")
             node = node.next
         print()
 
@@ -35,7 +35,7 @@ class SinglyLinkedList:
     def search(self, to_find):
         curr = self.head.next
         while curr:
-            if curr.data == to_find:
+            if curr.string == to_find:
                 return curr
             curr = curr.next
 
@@ -44,7 +44,7 @@ class SinglyLinkedList:
         prev = self.head # 이전 노드
         curr = self.head.next # 현재 노드
         while curr:
-            if curr.data == to_delete:
+            if curr.string == to_delete:
                 prev.next = curr.next
                 break
             prev = curr
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     sl.traverse()
 
     # 값 탐색
-    print(sl.search(6).next.data) # 7
+    print(sl.search(6).next.string) # 7
 
     # 값 삭제
     sl.delete(6) # 중간 값

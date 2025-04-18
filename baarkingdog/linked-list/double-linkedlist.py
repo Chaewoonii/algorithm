@@ -41,7 +41,7 @@ class DoubleLinkedList:
     def search(self, to_find):
         curr = self.head.next
         while curr:
-            if curr.data == to_find:
+            if curr.string == to_find:
                 return curr
             curr = curr.next
 
