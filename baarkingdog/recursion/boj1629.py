@@ -1,3 +1,4 @@
+# 곱셈
 # 힌트
 # a**n * a ** n = a ** 2n
 # mod: 나머지
@@ -12,7 +13,7 @@ def mod(a, b, c):
     else:
         k = mod(a, b//2, c)
         k = k * k % c
-        if b%2 == 0:
+        if b % 2 == 0:
             return k
         else:
             return k * a % c # 홀수면 한 번 더 계산해준다.
