@@ -17,6 +17,7 @@ def split_blocks(data, volume):
         for i in range(0, len(data), n)
         for j  in range(0, len(data), n)
     ]
+
 blocks = split_blocks(temp,3)
 print(temp)
 for t in temp:
@@ -31,3 +32,10 @@ arr1 = [[1, 2], [3, 4]]
 arr2 = [[5, 6], [7, 8]]
 sum_arr = [[a + b for a, b in zip(arr1[i], arr2[i])] for i in range(len(arr1))]
 print(sum_arr)
+
+lili = [1, 2, 3, 4, 5]
+print(*lili, sep=" ")
+print(*lili, sep="\n")
+print(*sum_arr, sep=" ")
+print(*sum(sum_arr, []), sep=" ")
+
